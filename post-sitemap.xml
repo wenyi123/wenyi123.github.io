@@ -31,31 +31,7 @@
     </url>
 
     <url>
-        <loc>http://www.ruozedata.com/article/hexo-theme-jepson/</loc>
-        <lastmod>2020-08-11T12:03:45.525Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://www.ruozedata.com/article/Sqoop%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</loc>
-        <lastmod>2020-08-11T12:03:45.525Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://www.ruozedata.com/article/hadoop-ha%E6%90%AD%E5%BB%BA/</loc>
-        <lastmod>2020-08-11T12:03:45.525Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://www.ruozedata.com/article/hadoop-ha%E4%BB%8B%E7%BB%8D/</loc>
+        <loc>http://www.ruozedata.com/article/MySQL5-7%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/</loc>
         <lastmod>2020-08-11T12:03:45.525Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -71,7 +47,7 @@
     </url>
 
     <url>
-        <loc>http://www.ruozedata.com/article/MySQL5-7%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/</loc>
+        <loc>http://www.ruozedata.com/article/Sqoop%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</loc>
         <lastmod>2020-08-11T12:03:45.525Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -79,24 +55,24 @@
     </url>
 
     <url>
-        <loc>http://www.ruozedata.com/article/Hive-%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/</loc>
-        <lastmod>2020-08-11T12:03:45.510Z</lastmod>
+        <loc>http://www.ruozedata.com/article/hadoop-ha%E4%BB%8B%E7%BB%8D/</loc>
+        <lastmod>2020-08-11T12:03:45.525Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
     </url>
 
     <url>
-        <loc>http://www.ruozedata.com/article/Hive%E6%90%AD%E5%BB%BA/</loc>
-        <lastmod>2020-08-11T12:03:45.510Z</lastmod>
+        <loc>http://www.ruozedata.com/article/hexo-theme-jepson/</loc>
+        <lastmod>2020-08-11T12:03:45.525Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
     </url>
 
     <url>
-        <loc>http://www.ruozedata.com/article/MapReduce%E6%9E%B6%E6%9E%84%E4%BB%8B%E7%BB%8D/</loc>
-        <lastmod>2020-08-11T12:03:45.510Z</lastmod>
+        <loc>http://www.ruozedata.com/article/hadoop-ha%E6%90%AD%E5%BB%BA/</loc>
+        <lastmod>2020-08-11T12:03:45.525Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -119,7 +95,55 @@
     </url>
 
     <url>
-        <loc>http://www.ruozedata.com/article/Hadoop-CDH%E7%89%88%E6%9C%AC%E5%AE%89%E8%A3%85%E4%BB%8B%E7%BB%8D/</loc>
+        <loc>http://www.ruozedata.com/article/Hive%E6%90%AD%E5%BB%BA/</loc>
+        <lastmod>2020-08-11T12:03:45.510Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://www.ruozedata.com/article/Linux%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4-%E4%BA%8C/</loc>
+        <lastmod>2020-08-11T12:03:45.510Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://www.ruozedata.com/article/Linux%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4-%E4%B8%89/</loc>
+        <lastmod>2020-08-11T12:03:45.510Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://www.ruozedata.com/article/Linux%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4-%E4%BD%9C%E4%B8%9A-%E4%B8%80/</loc>
+        <lastmod>2020-08-11T12:03:45.510Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://www.ruozedata.com/article/Linux%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4-%E5%9B%9B/</loc>
+        <lastmod>2020-08-11T12:03:45.510Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://www.ruozedata.com/article/Linux%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4%E4%BD%9C%E4%B8%9A-%E4%BA%8C/</loc>
+        <lastmod>2020-08-11T12:03:45.510Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://www.ruozedata.com/article/Linux%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4%E4%BD%9C%E4%B8%9A-%E4%B8%89/</loc>
         <lastmod>2020-08-11T12:03:45.510Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -143,7 +167,7 @@
     </url>
 
     <url>
-        <loc>http://www.ruozedata.com/article/Linux%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4%E4%BD%9C%E4%B8%9A-%E4%B8%89/</loc>
+        <loc>http://www.ruozedata.com/article/MapReduce%E6%9E%B6%E6%9E%84%E4%BB%8B%E7%BB%8D/</loc>
         <lastmod>2020-08-11T12:03:45.510Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -151,7 +175,7 @@
     </url>
 
     <url>
-        <loc>http://www.ruozedata.com/article/Linux%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4%E4%BD%9C%E4%B8%9A-%E4%BA%8C/</loc>
+        <loc>http://www.ruozedata.com/article/Hadoop-CDH%E7%89%88%E6%9C%AC%E5%AE%89%E8%A3%85%E4%BB%8B%E7%BB%8D/</loc>
         <lastmod>2020-08-11T12:03:45.510Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -159,31 +183,7 @@
     </url>
 
     <url>
-        <loc>http://www.ruozedata.com/article/Linux%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4-%E5%9B%9B/</loc>
-        <lastmod>2020-08-11T12:03:45.510Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://www.ruozedata.com/article/Linux%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4-%E4%BD%9C%E4%B8%9A-%E4%B8%80/</loc>
-        <lastmod>2020-08-11T12:03:45.510Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://www.ruozedata.com/article/Linux%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4-%E4%B8%89/</loc>
-        <lastmod>2020-08-11T12:03:45.510Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://www.ruozedata.com/article/Linux%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4-%E4%BA%8C/</loc>
+        <loc>http://www.ruozedata.com/article/Hive-%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/</loc>
         <lastmod>2020-08-11T12:03:45.510Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>

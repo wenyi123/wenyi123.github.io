@@ -211,100 +211,6 @@
 
 <div class="post-preview">
 
-    <a href="/article/ruozedata/">
-        <h2 class="post-title">
-            
-                <i class="fa fa-thumb-tack" style="color:#F4711F" ></i>
-                <!-- <i class="fa fa-thumb-tack" style="color:#F89E8C" ></i> -->
-                <!-- <i class="fa fa-thumb-tack" style="color:#1CB7ED" ></i> -->
-                <font color=#F4711F>置顶</font>
-                <!-- <font color=#F89E8C>置顶</font>  -->
-                <!-- <font color=#1CB7ED>置顶</font>  -->
-                                 
-            Join ruozedata if you have a dream
-        </h2>
-        <h3 class="post-subtitle">
-            This is hexo theme Demo.
-        </h3>
-        <div class="post-content-preview">
-            欢迎来到若泽数据，感谢大家对我们的支持.
-
-Join us if you have a dream.
-
-
-若泽数据官网http://ruozedata.com
-
-
-腾讯课堂(直播课)，搜若泽数据 http://ruoze.ke.qq.com
-
-
-Bilibili网站(视频),搜若泽数据 https://space.bilibili.com/356836323
-
-
-若泽大数据–官方博客(当前)......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by 小金 on
-            2015-07-11
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#ruozedata" title="ruozedata">ruozedata</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/article/hexo-theme-jepson/">
-        <h2 class="post-title">
-            
-                <i class="fa fa-thumb-tack" style="color:#F4711F" ></i>
-                <!-- <i class="fa fa-thumb-tack" style="color:#F89E8C" ></i> -->
-                <!-- <i class="fa fa-thumb-tack" style="color:#1CB7ED" ></i> -->
-                <font color=#F4711F>置顶</font>
-                <!-- <font color=#F89E8C>置顶</font>  -->
-                <!-- <font color=#1CB7ED>置顶</font>  -->
-                                 
-            [Hexo] Theme Jepson
-        </h2>
-        <h3 class="post-subtitle">
-            This is hexo theme Demo.
-        </h3>
-        <div class="post-content-preview">
-            
-This Jepson theme created by Jepson modified from the original Porter YuHsuan
-
-Blog Demo
-ruozedata官网 : www.ruozedata.com
-
-Install Hexo
-Install Node.js  and Git
-12345678#For windowNode.js https://n......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by 小金 on
-            2015-07-10
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Hexo" title="Hexo">Hexo</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
     <a href="/article/Sqoop基本使用/">
         <h2 class="post-title">
                                  
@@ -580,6 +486,76 @@ shuffle： 洗牌，根据key将不同机器上的数据进行网络传输规整
 </div>
 <hr>
 
+<div class="post-preview">
+
+    <a href="/article/HDFS架构介绍/">
+        <h2 class="post-title">
+                                 
+            HDFS架构介绍
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            1.HDFS主从架构角色
+
+
+namenode  名称节点 nn
+
+文件名称
+文件的目录结构
+文件的属性 权限 创建时间 副本数
+一个文件被对应切割哪些数据块 副本数的块  9块===》数据块对应分布在哪些节点上
+blockmap 块映射  当然nn节点是不会持久化存储这种映射关系
+是通过集群的启动和运行时，dn定期发送blockreport给nn，然后nn就在内存中动态维护这种映射关系
+作......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 小金 on
+            2016-05-10
+        </p>
+        <div class="tags">
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/article/Hadoop-CDH版本安装介绍-二/">
+        <h2 class="post-title">
+                                 
+            Hadoop CDH5.16.2的部署安装（二）
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            1.YARN部署
+
+官方文档：https://hadoop.apache.org/docs/r2.10.0/hadoop-project-dist/hadoop-common/SingleCluster.html
+
+修改文件：etc/hadoop/mapred-site.xml: 开启yarn
+123456&lt;configuration&gt;    &lt;property&gt;  ......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 小金 on
+            2016-05-09
+        </p>
+        <div class="tags">
+            
+        </div>
+    
+
+</div>
+<hr>
+
 
 
 <!-- Pager -->
@@ -588,7 +564,7 @@ shuffle： 洗牌，根据key将不同机器上的数据进行网络传输规整
     
     
         <li class="next">
-            <a href="/page/2/">Older Posts &rarr;</a>
+            <a href="/archives/2/">Older Posts &rarr;</a>
         </li>
     
 </ul>
