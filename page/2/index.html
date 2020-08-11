@@ -18,7 +18,7 @@
         
     </title>
 
-    <link rel="canonical" href="http://www.ruozedata.com/archives/3/">
+    <link rel="canonical" href="http://www.ruozedata.com/page/2/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -211,23 +211,33 @@
 
 <div class="post-preview">
 
-    <a href="/article/Linux基础命令-三/">
+    <a href="/article/HDFS架构介绍/">
         <h2 class="post-title">
                                  
-            Linux基础命令(三)
+            HDFS架构介绍
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            1.用户 用户组
-1234567891011 #ll /usr/sbin/user*-rwxr-x--- 1 root root 118192 Nov  6  2016 /usr/sbin/useradd-rwxr-x--- 1 root root  80360 Nov  6  2016 /usr/sbin/userdel-rwxr-x--- 1 root root 113840 Nov  ......
+            1.HDFS主从架构角色
+
+
+namenode  名称节点 nn
+
+文件名称
+文件的目录结构
+文件的属性 权限 创建时间 副本数
+一个文件被对应切割哪些数据块 副本数的块  9块===》数据块对应分布在哪些节点上
+blockmap 块映射  当然nn节点是不会持久化存储这种映射关系
+是通过集群的启动和运行时，dn定期发送blockreport给nn，然后nn就在内存中动态维护这种映射关系
+作......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by 小金 on
-            2016-04-23
+            2016-05-10
         </p>
         <div class="tags">
             
@@ -239,27 +249,27 @@
 
 <div class="post-preview">
 
-    <a href="/article/Linux基础命令-一/">
+    <a href="/article/Hadoop-CDH版本安装介绍-二/">
         <h2 class="post-title">
                                  
-            Linux基础命令(一)
+            Hadoop CDH5.16.2的部署安装（二）
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            pwd 查看当前光标所在的目录 路径
-[root@localhost ~]pwd
-[root@localhost ~]/root
-ls 查看
-[root@localhost ~]ls
-123456ls 显示文件夹 文件名称ls -l 显示额外信息  权限 用户用户组 时间 大小ls -l -a  也显示隐藏文件夹 文件ls -l -h  仅仅查看文件的大小ls -l -r -t  按时间排序......
+            1.YARN部署
+
+官方文档：https://hadoop.apache.org/docs/r2.10.0/hadoop-project-dist/hadoop-common/SingleCluster.html
+
+修改文件：etc/hadoop/mapred-site.xml: 开启yarn
+123456&lt;configuration&gt;    &lt;property&gt;  ......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by 小金 on
-            2016-04-20
+            2016-05-09
         </p>
         <div class="tags">
             
@@ -271,47 +281,38 @@ ls 查看
 
 <div class="post-preview">
 
-    <a href="/article/ruozedata/">
+    <a href="/article/Hadoop-CDH版本安装介绍/">
         <h2 class="post-title">
-            
-                <i class="fa fa-thumb-tack" style="color:#F4711F" ></i>
-                <!-- <i class="fa fa-thumb-tack" style="color:#F89E8C" ></i> -->
-                <!-- <i class="fa fa-thumb-tack" style="color:#1CB7ED" ></i> -->
-                <font color=#F4711F>置顶</font>
-                <!-- <font color=#F89E8C>置顶</font>  -->
-                <!-- <font color=#1CB7ED>置顶</font>  -->
                                  
-            Join ruozedata if you have a dream
+            Hadoop CDH5.16.2的部署安装(一)
         </h2>
         <h3 class="post-subtitle">
-            This is hexo theme Demo.
+            
         </h3>
         <div class="post-content-preview">
-            欢迎来到若泽数据，感谢大家对我们的支持.
-
-Join us if you have a dream.
+            1.Hadoop介绍
 
 
-若泽数据官网http://ruozedata.com
+广义: 以Apache hadoop软件为主的生态圈 也包含 hive sqoop hbase kafka spark flink
+狭义: 以Apache hadoop软件
 
 
-腾讯课堂(直播课)，搜若泽数据 http://ruoze.ke.qq.com
+以Apache hadoop软件:
+主流2.x版本
+hdfs   存储
+mapreduce  计算(作业)
+yarn   资源和作业调度
 
 
-Bilibili网站(视频),搜若泽数据 https://space.bilibili.com/356836323
-
-
-若泽大数据–官方博客(当前)......
+大数据平台: 存储是第一位 ；存储和计算是相辅相......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by 小金 on
-            2015-07-11
+            2016-05-07
         </p>
         <div class="tags">
-            
-              <a href="/tags/#ruozedata" title="ruozedata">ruozedata</a>
             
         </div>
     
@@ -321,41 +322,244 @@ Bilibili网站(视频),搜若泽数据 https://space.bilibili.com/356836323
 
 <div class="post-preview">
 
-    <a href="/article/hexo-theme-jepson/">
+    <a href="/article/Linux基础命令作业-五/">
         <h2 class="post-title">
-            
-                <i class="fa fa-thumb-tack" style="color:#F4711F" ></i>
-                <!-- <i class="fa fa-thumb-tack" style="color:#F89E8C" ></i> -->
-                <!-- <i class="fa fa-thumb-tack" style="color:#1CB7ED" ></i> -->
-                <font color=#F4711F>置顶</font>
-                <!-- <font color=#F89E8C>置顶</font>  -->
-                <!-- <font color=#1CB7ED>置顶</font>  -->
                                  
-            [Hexo] Theme Jepson
+            mysql 作业
         </h2>
         <h3 class="post-subtitle">
-            This is hexo theme Demo.
+            
         </h3>
         <div class="post-content-preview">
-            
-This Jepson theme created by Jepson modified from the original Porter YuHsuan
-
-Blog Demo
-ruozedata官网 : www.ruozedata.com
-
-Install Hexo
-Install Node.js  and Git
-12345678#For windowNode.js https://n......
+            1.查询所有员工详细信息，用工资降序排序，如果工资相同使用入职日期升序排序
+  1234SELECT * FROM emp ORDER BY (sal+IFNULL(comm,0)) desc,hiredate;
+2.列出薪金大于1500的各种工作及从事此工作的员工人数
+  12345SELECTCOUNT(empno) as &apos;count&apos;,jobFROM empWHE......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by 小金 on
-            2015-07-10
+            2016-05-01
         </p>
         <div class="tags">
             
-              <a href="/tags/#Hexo" title="Hexo">Hexo</a>
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/article/Linux基础命令作业-四/">
+        <h2 class="post-title">
+                                 
+            Linux基础命令作业(四)
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            1.什么是管道符
+管道符“|”
+命令格式：命令A|命令B，即命令1的正确输出作为命令B的操作对象
+2.老板让我打开A服务器的 只知道名称好像含有xxx服务的web界面，请问怎么做？
+
+得到A服务器的ip
+ps -ef|grep xxx --》pid
+netstat -nlp|grep pid --》port
+打开浏览器: http://ip:port
+
+3.在杀死进程时，我们应该是否要确认 ......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 小金 on
+            2016-05-01
+        </p>
+        <div class="tags">
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/article/SQL命令整理-一/">
+        <h2 class="post-title">
+                                 
+            SQL命令整理(一)
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            1.sql类型
+
+ddl 数据定义语言  create  drop
+dml 数据操作语言  select insert update delete  增删改查
+dcl 数据控制语言  grant
+
+2.建表规范
+123456789101112create table ruoze(id int(11)  not null auto_increment,  第一列必须是id自增长name var......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 小金 on
+            2016-04-30
+        </p>
+        <div class="tags">
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/article/MySQL5-7安装部署/">
+        <h2 class="post-title">
+                                 
+            MySQL5.7安装部署
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            1.下载安装包
+https://github.com/Hackeruncle/MySQL
+2.JDK部署
+
+下载好JDK安装包：jdk-8u45-linux-x64.gz
+解压到指定目录
+
+12mkdir  /usr/javatar -xzvf jdk-8u45-linux-x64.gz -C /usr/java/
+
+重设置用户和用户组
+
+12cd     /usr/javachown -R......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 小金 on
+            2016-04-30
+        </p>
+        <div class="tags">
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/article/Linux基础命令作业-三/">
+        <h2 class="post-title">
+                                 
+            Linux基础命令作业(三)
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            1.强制删除文件夹
+rm -rf 文件夹
+2.个人环境变量文件，默认在哪里？推荐使用哪个呢？怎样生效？生效完成后，习惯做一件事是执行什么命令？
+个人: ~/.bash_profile
+~/.bashrc
+推荐 :~/.bashrc
+生效: source ~/.bashrc
+生效完成后查看配置的环境变量是否有效
+3.历史命令，执行第55行；清空历史命令
+查看历史命令：history
+!55  ......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 小金 on
+            2016-04-28
+        </p>
+        <div class="tags">
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/article/Linux基础命令作业-二/">
+        <h2 class="post-title">
+                                 
+            Linux基础命令作业(二)
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            1.查看当前目录
+pwd
+2.隐藏文件、文件夹以什么开始，怎样查看
+隐藏文件夹 文件是以.开头
+通过ls -l -a命令查看
+ -l 等价于什么？
+等价于ll
+4.级联创建文件夹
+mkdir -p f1/f2/f3
+5.创建文件哪几种方式
+1.touch 文件名
+2.vi 文件名
+3.echo &quot;” &gt; 文件名
+6.cp和mv谁快？ 能不能在cp 、mv过程，顺便修改名称呢？......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 小金 on
+            2016-04-27
+        </p>
+        <div class="tags">
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/article/Linux基础命令-四/">
+        <h2 class="post-title">
+                                 
+            Linux基础命令(四)
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            1.系统常用检查命令
+查看磁盘使用 df -h
+123[ruoze@ruozedata001 ~]$ df -hFilesystem      Size  Used Avail Use% Mounted on/dev/vda1        40G   16G   25G  39% /
+查看内存使用 free -m
+12345[ruoze@ruozedata001 ~]$ free -m  ......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 小金 on
+            2016-04-26
+        </p>
+        <div class="tags">
             
         </div>
     
@@ -370,9 +574,13 @@ Install Node.js  and Git
 <ul class="pager">
     
         <li class="previous">
-            <a href="/archives/2/">&larr; Newer Posts</a>
+            <a href="/">&larr; Newer Posts</a>
         </li>
     
+    
+        <li class="next">
+            <a href="/page/3/">Older Posts &rarr;</a>
+        </li>
     
 </ul>
 
