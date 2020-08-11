@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content>
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          hadoop ha 搭建 - 若泽数据@小金 | Blog
+        
+    </title>
+
+    <link rel="canonical" href="http://www.ruozedata.com/article/hadoop-ha搭建/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+
+    <link rel="stylesheet" href="/css/donate.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('/img/article_header/article_bg.jpg')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                        </div>
+                        <h1>hadoop ha 搭建</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by 小金 on
+                            2016-05-26
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">若泽数据@小金Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h1><span id="1搭建的环境准备">1.搭建的环境准备</span></h1>
+<ol>
+<li>购买3台按量付费的华为云服务器</li>
+<li>配置集群的/etc/hosts文件,追加如下配置</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">192.168.0.155   hadoop001</span><br><span class="line">192.168.0.31    hadoop002</span><br><span class="line">192.168.0.123   hadoop003</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>配置集群的信任关系</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">[root@hadoop001-3 ~]# useradd hadoop</span><br><span class="line">[root@hadoop001-3 ~]# su - hadoop</span><br><span class="line">[hadoop@hadoop001-3 ~]$ ssh-keygen</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[hadoop@hadoop002 ~]$ scp ~/.ssh/id_rsa.pub  root@hadoop001:/home/hadoop/.ssh/id_rsa.pub2</span><br><span class="line">[hadoop@hadoop003 ~]$ scp ~/.ssh/id_rsa.pub  root@hadoop001:/home/hadoop/.ssh/id_rsa.pub3</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[hadoop@hadoop001 ~]$ cat ~/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys</span><br><span class="line">[hadoop@hadoop001 ~]$ cat ~/.ssh/id_rsa.pub2 &gt;&gt; ~/.ssh/authorized_keys</span><br><span class="line">[hadoop@hadoop001 ~]$ cat ~/.ssh/id_rsa.pub3 &gt;&gt; ~/.ssh/authorized_keys</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[hadoop@hadoop001 ~]$ scp ~/.ssh/authorized_keys  root@hadoop002:/home/hadoop/.ssh/</span><br><span class="line">[hadoop@hadoop001 ~]$ scp ~/.ssh/authorized_keys  root@hadoop003:/home/hadoop/.ssh/</span><br><span class="line"></span><br><span class="line">[root@hadoop001 ~]$ chown hadoop:hadoop ~/.ssh/authorized_keys</span><br><span class="line">[root@hadoop002 ~]$ chown hadoop:hadoop ~/.ssh/authorized_keys</span><br><span class="line">[root@hadoop003 ~]$ chown hadoop:hadoop ~/.ssh/authorized_keys</span><br><span class="line"></span><br><span class="line">[hadoop@hadoop001 ~]$ chmod 0600 ~/.ssh/authorized_keys</span><br><span class="line">[hadoop@hadoop002 ~]$ chmod 0600 ~/.ssh/authorized_keys</span><br><span class="line">[hadoop@hadoop003 ~]$ chmod 0600 ~/.ssh/authorized_keys</span><br></pre></td></tr></table></figure>
+<p>测试：</p>
+   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssh hadoop001 date</span><br><span class="line">ssh hadoop002 date</span><br><span class="line">ssh hadoop003 date</span><br></pre></td></tr></table></figure>
+<h1><span id="2jdk的安装略">2.JDK的安装(略)</span></h1>
+<h1><span id="3zookeeper集群搭建">3.zookeeper集群搭建</span></h1>
+<ol>
+<li>下载解压 zookeeper-3.4.6.tar.gz<br>
+[root@hadoop001 ~]# cd /opt/software/<br>
+[root@hadoop001 software]# wget <a href="https://www.apache.org/dist/zookeeper/zookeeper-3.4.6/zookeeper-3.4.6.tar.gz" target="_blank" rel="noopener">https://www.apache.org/dist/zookeeper/zookeeper-3.4.6/zookeeper-3.4.6.tar.gz</a> --no-check-certificate<br>
+[root@hadoop001 software]# tar -xvf zookeeper-3.4.6.tar.gz</li>
+<li>修改配置文件<br>
+[root@hadoop001 conf]# vi zoo.cfg
+<ul>
+<li>dataDir=/home/hadoop/data/zookeeper</li>
+<li>server.1=hadoop001:2888:3888<br>
+server.2=hadoop002:2888:3888<br>
+server.3=hadoop003:2888:3888</li>
+</ul>
+</li>
+<li>各节点添加ZK服务ID
+<ul>
+<li>hadoop001: echo 1 &gt; /home/hadoop/data/zookeeper/myid</li>
+<li>hadoop002: echo 2 &gt; /home/hadoop/data/zookeeper/myid</li>
+<li>hadoop003: echo 3 &gt; /home/hadoop/data/zookeeper/myid</li>
+</ul>
+</li>
+<li>启动ZK，.查看个节点ZK状态<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bin/zkServer.sh start</span><br><span class="line">bin/zkServer.sh status</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1><span id="4-hadoop集群搭建">4. Hadoop集群搭建</span></h1>
+<ol>
+<li>
+<p>下载解压 hadoopCDH5.16.2版本</p>
+</li>
+<li>
+<p>配置文件修改</p>
+<ul>
+<li><a href="http://hadoop-env.sh" target="_blank" rel="noopener">hadoop-env.sh</a>  显性指定java 目录<br>
+用网盘中的文件替换3台hadoop的配置文件</li>
+<li>hdfs-site.xml</li>
+<li>core-site.xml</li>
+<li>mapred-site.xml</li>
+<li>slaves</li>
+<li>yarn-site.xml</li>
+</ul>
+</li>
+</ol>
+<h1><span id="5-启动集群">5. 启动集群</span></h1>
+<ol>
+<li>
+<p>启动 zookeeper</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[root@hadoop001 zookeeper]# $ZOOKEEPER_HOME/bin/zkServer.sh start</span><br><span class="line">   [root@hadoop002 zookeeper]# $ZOOKEEPER_HOME/bin/zkServer.sh start</span><br><span class="line">   [root@hadoop003 zookeeper]# $ZOOKEEPER_HOME/bin/zkServer.sh start</span><br><span class="line">[root@hadoop001 zookeeper]# $ZOOKEEPER_HOME/bin/zkServer.sh status</span><br><span class="line">JMX enabled by default</span><br><span class="line">Using config: /opt/software/zookeeper/bin/../conf/zoo.cfg</span><br><span class="line">Mode: follower</span><br><span class="line">[root@hadoop001 zookeeper]#</span><br><span class="line">[root@hadoop002 zookeeper]# $ZOOKEEPER_HOME/bin/zkServer.sh status</span><br><span class="line">JMX enabled by default</span><br><span class="line">Using config: /opt/software/zookeeper/bin/../conf/zoo.cfg</span><br><span class="line">Mode: leader</span><br><span class="line">[root@hadoop002 zookeeper]#</span><br><span class="line">[root@hadoop003 zookeeper]# $ZOOKEEPER_HOME/bin/zkServer.sh status</span><br><span class="line">JMX enabled by default</span><br><span class="line">Using config: /opt/software/zookeeper/bin/../conf/zoo.cfg</span><br><span class="line">Mode: follower</span><br><span class="line">[root@hadoop003 zookeeper]#</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>启动 hadoop(HDFS+YARN)<br>
+a. 3台集群启动 JournalNode 进程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[root@hadoop001 sbin]# hadoop-daemon.sh start journalnode</span><br><span class="line">starting journalnode, logging to /opt/software/hadoop/logs/hadoop-root-journalnode-	  	  hadoop001.out</span><br><span class="line">[root@hadoop001 sbin]# jps</span><br><span class="line">4016 Jps</span><br><span class="line">3683 QuorumPeerMain</span><br><span class="line">3981 JournalNode</span><br><span class="line">[root@hadoop001 sbin]#</span><br><span class="line">[root@hadoop002 sbin]# hadoop-daemon.sh start journalnode</span><br><span class="line">starting journalnode, logging to /opt/software/hadoop/logs/hadoop-root-journalnode-hadoop002.out</span><br><span class="line">[root@hadoop002 sbin]# jps</span><br><span class="line">9891 Jps</span><br><span class="line">9609 QuorumPeerMain</span><br><span class="line">9852 JournalNode</span><br><span class="line">[root@hadoop002 sbin]#</span><br><span class="line">[root@hadoop003 sbin]# hadoop-daemon.sh start journalnode</span><br><span class="line">starting journalnode, logging to /opt/software/hadoop/logs/hadoop-root-journalnode-hadoop003.out</span><br><span class="line">[root@hadoop003 sbin]# jps</span><br><span class="line">4425 JournalNode</span><br><span class="line">4460 Jps</span><br><span class="line">4191 QuorumPeerMain</span><br><span class="line">[root@hadoop003 sbin]#</span><br></pre></td></tr></table></figure>
+<p>b. 格式化NameNode</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@hadoop001 hadoop]# hadoop namenode -format</span><br></pre></td></tr></table></figure>
+<p>c. 同步 NameNode 元数据<br>
+将hadoop001节点上的dfs.namenode.name.dir目录下的文件复制到hadoop002节点上</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp -r dfs/ root@hadoop002:/opt/software/hadoop</span><br></pre></td></tr></table></figure>
+<p>d. 在两天namenode节点上初始化 ZFCK</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@hadoop001 bin]# hdfs zkfc -formatZK</span><br><span class="line">[root@hadoop002 bin]# hdfs zkfc -formatZK</span><br></pre></td></tr></table></figure>
+<p>e. 启动 HDFS</p>
+<ul>
+<li>
+<p>在 hadoop001 执行 <a href="http://start-dfs.sh" target="_blank" rel="noopener">start-dfs.sh</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@hadoop001 sbin]# start-dfs.sh</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>单进程启动</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">NameNode(hadoop001, hadoop002):</span><br><span class="line">hadoop-daemon.sh start namenode</span><br><span class="line">DataNode(hadoop001, hadoop002, hadoop003):</span><br><span class="line">hadoop-daemon.sh start datanode</span><br><span class="line">JournamNode(hadoop001, hadoop002, hadoop003):</span><br><span class="line">hadoop-daemon.sh start journalnode</span><br><span class="line">ZKFC(hadoop001, hadoop002):</span><br><span class="line">hadoop-daemon.sh start zkfc</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>f. 验证 namenode,datanode,zkfc</p>
+<ul>
+<li>
+<p>进程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">[root@hadoop001 sbin]# jps</span><br><span class="line">12712 Jps</span><br><span class="line">12593 DFSZKFailoverController</span><br><span class="line">12278 NameNode</span><br><span class="line">[root@hadoop002 ~]# jps</span><br><span class="line">29714 NameNode</span><br><span class="line">29849 DFSZKFailoverController</span><br><span class="line">30229 Jps</span><br><span class="line">[root@hadoop001 ~]# jps</span><br><span class="line">6348 JournalNode</span><br><span class="line">8775 Jps</span><br><span class="line">559 QuorumPeerMain</span><br><span class="line">8509 DataNode</span><br><span class="line">[root@hadoop002 ~]# jps</span><br><span class="line">9430 Jps</span><br><span class="line">9160 DataNode</span><br><span class="line">7197 JournalNode</span><br><span class="line">2073 QuorumPeerMain</span><br><span class="line">[root@hadoop003 ~]# jps</span><br><span class="line">11 若泽数据 www.hadoop.com</span><br><span class="line">16722 JournalNode</span><br><span class="line">17369 Jps</span><br><span class="line">15519 QuorumPeerMain</span><br><span class="line">17214 DataNode</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>页面<br>
+hadoop001: <a href="http://121.37.159.31:50070/dfshealth.html#tab-overview" target="_blank" rel="noopener">http://121.37.159.31:50070/dfshealth.html#tab-overview</a><br>
+<img src="hadoop002.png" alt="enter description here"><br>
+hadoop002: <a href="http://124.70.161.119:50070/dfshealth.html#tab-overview" target="_blank" rel="noopener">http://124.70.161.119:50070/dfshealth.html#tab-overview</a><br>
+<img src="hadoop002.png" alt="enter description here"></p>
+</li>
+</ul>
+<p>g. 启动 YARN</p>
+<ul>
+<li>
+<p>集群启动</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@hadoop001 hadoop]# start-yarn.sh</span><br></pre></td></tr></table></figure>
+<p>hadoop002 备机启动 RM</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@hadoop001 hadoop]# yarn-daemon.sh start resourcemanager</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>单进程启动</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@hadoop001~002]# yarn-daemon.sh start resourcemanager</span><br><span class="line">[root@hadoop001~003]# yarn-daemon.sh start nodemanager</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>关闭</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@hadoop001 sbin]# stop-yarn.sh</span><br><span class="line">      #包含 namenode 的 resourcemanager 进程，datanode 的 nodemanager 进程</span><br><span class="line">      [root@hadoop002 sbin]# yarn-daemon.sh stop resourcemanager</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>h. 验证 resourcemanager,nodemanager</p>
+<ul>
+<li>
+<p>进程</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">[root@hadoop001 ~]# jps</span><br><span class="line">9955 NameNode</span><br><span class="line">5043 NodeManager</span><br><span class="line">3683 QuorumPeerMain</span><br><span class="line">4679 DFSZKFailoverController</span><br><span class="line">5355 Jps</span><br><span class="line">4348 DataNode</span><br><span class="line">3981 JournalNode</span><br><span class="line">4943 ResourceManager</span><br><span class="line">[root@hadoop001 ~]#</span><br><span class="line">[root@hadoop002 ~]# jps</span><br><span class="line">10561 ResourceManager</span><br><span class="line">9955 NameNode</span><br><span class="line">10021 DataNode</span><br><span class="line">10183 DFSZKFailoverController</span><br><span class="line">9609 QuorumPeerMain</span><br><span class="line">10619 Jps</span><br><span class="line">9852 JournalNode</span><br><span class="line">10429 NodeManager</span><br><span class="line">[root@hadoop002 ~]#</span><br><span class="line">[root@hadoop003 ~]# jps</span><br><span class="line">13 若泽数据 www.hadoop.com</span><br><span class="line">4518 DataNode</span><br><span class="line">4679 NodeManager</span><br><span class="line">4425 JournalNode</span><br><span class="line">4794 Jps</span><br><span class="line">4191 QuorumPeerMain</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>页面<br>
+ResourceManger（Active）：<a href="http://121.37.159.31:8088/cluster" target="_blank" rel="noopener">http://121.37.159.31:8088/cluster</a><br>
+<img src="yarn001.png" alt="enter description here"><br>
+ResourceManger（Standby）：<a href="http://124.70.161.119:8088/cluster/cluster" target="_blank" rel="noopener">http://124.70.161.119:8088/cluster/cluster</a><br>
+<img src="yarn002.png" alt="enter description here"></p>
+</li>
+</ul>
+</li>
+</ol>
+<h1><span id="6-关闭集群">6. 关闭集群</span></h1>
+<ol>
+<li>关闭 Hadoop(YARN–&gt;HDFS)</li>
+</ol>
+   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@hadoop001 sbin]# stop-yarn.sh</span><br><span class="line">   [root@hadoop002 sbin]# yarn-daemon.sh stop resourcemanager</span><br><span class="line">   [root@hadoop001 sbin]# stop-dfs.sh</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>关闭 Zookeeper</li>
+</ol>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@hadoop001 bin]# zkServer.sh stop</span><br><span class="line">[root@hadoop002 bin]# zkServer.sh stop</span><br><span class="line">[root@hadoop003 bin]# zkServer.sh stop</span><br></pre></td></tr></table></figure>
+<h1><span id="7-再次启动集群">7. 再次启动集群</span></h1>
+<ol>
+<li>启动 Zookeeper</li>
+</ol>
+   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@hadoop001 bin]# zkServer.sh start</span><br><span class="line">[root@hadoop002 bin]# zkServer.sh start</span><br><span class="line">[root@hadoop003 bin]# zkServer.sh start</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>启动 Hadoop(HDFS–&gt;YARN)</li>
+</ol>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@hadoop001 sbin]# start-dfs.sh</span><br><span class="line">[root@hadoop001 sbin]# start-yarn.sh</span><br><span class="line">[root@hadoop002 sbin]# yarn-daemon.sh start resourcemanager</span><br><span class="line">[root@hadoop001 ~]# $HADOOP_HOME/sbin/mr-jobhistory-daemon.sh start historyserver</span><br></pre></td></tr></table></figure>
+<h1><span id="8-监控集群">8. 监控集群</span></h1>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@hadoop001 ~]# hdfs dfsadmin -report</span><br></pre></td></tr></table></figure>
+<ul>
+<li>HDFS:<a href="http://121.37.159.31:50070/dfshealth.html#tab-overview" target="_blank" rel="noopener">http://121.37.159.31:50070/dfshealth.html#tab-overview</a></li>
+<li>HDFS:<a href="http://124.70.161.119:50070/dfshealth.html#tab-overview" target="_blank" rel="noopener">http://124.70.161.119:50070/dfshealth.html#tab-overview</a></li>
+<li>ResourceManger（Active）：<a href="http://121.37.159.31:8088/cluster" target="_blank" rel="noopener">http://121.37.159.31:8088/cluster</a></li>
+<li>ResourceManger（Standby）：<a href="http://124.70.161.119:8088/cluster/cluster" target="_blank" rel="noopener">http://124.70.161.119:8088/cluster/cluster</a></li>
+<li>JobHistory:http://121.37.159.31:50070:19888/jobhistory</li>
+</ul>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/article/Hive搭建/" data-toggle="tooltip" data-placement="top" title="Hive 环境搭建">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/article/hadoop-ha介绍/" data-toggle="tooltip" data-placement="top" title="hadoop ha介绍">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <br>
+
+                <!--打赏-->
+                
+                <!--打赏-->
+
+                <br>
+                <!--分享-->
+                
+                    <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                    <!--  css & js -->
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!--分享-->
+                <br>                       
+                
+                <!-- require APlayer -->
+                
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+
+                
+
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+  
+    <style>
+      span.toc-nav-number{
+        display: none
+      }
+    </style>
+  
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">1.搭建的环境准备</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">2.JDK的安装(略)</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">3.zookeeper集群搭建</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">4. Hadoop集群搭建</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">5. 启动集群</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">6. 关闭集群</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">7. 再次启动集群</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">8.</span> <span class="toc-nav-text">8. 监控集群</span></a></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://www.ruozedata.com" target="_blank">若泽数据官网</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'rz'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+<!-- chrome Firefox 中文锚点定位失效-->
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+<!-- smooth scroll behavior polyfill  -->
+<script type="text/javascript" src="/js/smoothscroll.js"></script>
+<script>
+        $('#toc').on('click','a',function(a){
+            // var isChrome = window.navigator.userAgent.indexOf("Chrome") !== -1;
+            // console.log(window.navigator.userAgent,isChrome)
+                // if(isChrome) {
+                    // console.log(a.currentTarget.outerHTML);
+                    // console.log($(a.currentTarget).attr("href"));
+                    //跳转到指定锚点
+                    // document.getElementById(a.target.innerText.toLowerCase()).scrollIntoView(true);
+                    document.getElementById($(a.currentTarget).attr("href").replace("#","")).scrollIntoView({behavior: 'smooth' });
+                // }
+        })  
+</script>
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/hackeruncle">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 小金 2020 
+                    By <a href="http://www.ruozedata.com">若泽数据，企业在职</a> | BigData
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=ruozedata&repo=Bigdata&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://www.ruozedata.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = 'xxx';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="http://www.ruozedata.com/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
